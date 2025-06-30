@@ -1,17 +1,17 @@
 'use client'
 
 import { useEffect, useRef, useState } from "react";
-import LeadDropdown from "./LeadDropdown";
 import ActionsDropdown from "./ActionsDropdown";
-import LeadsTableArea from "./LeadsTableArea";
 import FilterDropdown from "./FilterDropdown";
 import TableSwitcher from "./TableSwitcher";
+import InboxTableArea from "./InboxTableArea";
+import ArchiveTableArea from "./ArchiveTableArea";
+import TypeDropdown from "../ui/TypeDropdown";
 
 export default function LeadsTable() {
     const [showSearchDropdown, setShowSearchDropdown] = useState(false);
     const [showFilterDropdown, setShowFilterDropdown] = useState(false);
     const [activeTab, setActiveTab] = useState("inbox");
-
     const searchRef = useRef(null);
     const filterRef = useRef(null);
 
@@ -51,14 +51,14 @@ export default function LeadsTable() {
                         {/* Search Dropdown */}
                         {showSearchDropdown && (
                             <div className="absolute top-full mt-0 w-full bg-[#fff] search-dropdown rounded-md z-10">
-                                <div className="px-4 py-2 text-sm text-gray-500 font-medium">
+                                <div className="px-4 py-2 text-[14px] text-[#4A4A4A] font-urbanist">
                                     Recently viewed
                                 </div>
-                                <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-2">
+                                <div className="px-4 py-2 text-[12px] text-[#2A2A2A] font-urbanist hover:bg-gray-100 cursor-pointer flex items-center space-x-2">
                                     <i className="fa fa-bullseye text-black"></i>
                                     <span>Foxton Lead</span>
                                 </div>
-                                <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-2">
+                                <div className="px-4 py-2 text-[12px] text-[#2A2A2A] font-urbanist hover:bg-gray-100 cursor-pointer flex items-center space-x-2">
                                     <i className="fa fa-circle text-indigo-500 text-xs"></i>
                                     <span>Goodtext Lead</span>
                                 </div>
@@ -75,17 +75,24 @@ export default function LeadsTable() {
             </div>
 
             {/* Filter Icon & Dropdown */}
-            <div className="flex justify-start px-4 py-3 gap-5" ref={filterRef}>
-                <FilterDropdown/>
-
-               <TableSwitcher/>
-
-
-                <LeadDropdown />
-                <ActionsDropdown/>
+            <div className="flex justify-between px-4 py-3 gap-5" ref={filterRef}>
+                <div className="flex justify-start gap-5" >
+                <FilterDropdown />
+                <TableSwitcher activeTab={activeTab} setActiveTab={setActiveTab} />
+                <TypeDropdown type={'Lead'} />
+                </div>
+                <div className="flex justify-start gap-5" >
+                <ActionsDropdown />
+                <ActionsDropdown />
+                </div>
             </div>
+            {
+                activeTab==='inbox'?
+              <InboxTableArea/>
+              :<ArchiveTableArea/>
+            }
 
-<LeadsTableArea/>
+           
 
         </div>
     );
