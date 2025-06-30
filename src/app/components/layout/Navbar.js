@@ -13,12 +13,12 @@ import Image from "next/image";
 
 
 const tabs = [
-  { name: "Dashboard", path: DashboardIcon },
-  { name: "Leads", path: LeadsIcon },
-  { name: "Deals", path: DealsIcon },
-  { name: "Tasks", path: TasksIcon },
-  { name: "Communication", path: CommunicationIcon },
-  { name: "Sales", path: SalesIcon },
+  { name: "Dashboard", loaction:"/dashboard",path: DashboardIcon ,},
+  { name: "Leads", loaction:"/leads",path: LeadsIcon },
+  { name: "Deals", loaction:"/deals",path: DealsIcon },
+  { name: "Tasks", loaction:"#",path: TasksIcon },
+  { name: "Communication", loaction:"#",path: CommunicationIcon },
+  { name: "Sales", loaction:"#",path: SalesIcon },
 ];
 
 export default function Navbar() {
@@ -43,7 +43,8 @@ export default function Navbar() {
       {/* Center Tabs */}
       <div className="flex nav-center-custom-gradient-box px-3 py-2 space-x-2 transition-all duration-300">
         {tabs.map((tab) => (
-          <button
+          <a
+          href={tab.loaction}
             key={tab.name}
             onClick={() => handleTabClick(tab.name)}
             className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-500 cursor-pointer hover:bg-[#3A55A614] font-ibm ${
@@ -54,7 +55,7 @@ export default function Navbar() {
           >
              <Image src={tab.path} alt={tab.name} />
             <span className={`${activeTab === tab.name?'block':'hidden'}`}>{tab.name}</span>
-          </button>
+          </a>
         ))}
       </div>
 
