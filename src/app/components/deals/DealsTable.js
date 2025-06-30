@@ -2,12 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import TypeDropdown from "../ui/TypeDropdown";
-import ActionsDropdown from "../leads/ActionsDropdown";
-import InboxTableArea from "../leads/InboxTableArea";
-import ArchiveTableArea from "../leads/ArchiveTableArea";
+import ArchiveTableArea from "./ArchiveTableArea";
 import FilterDropdown from "./FilterDropdown";
 import TableSwitcher from "./TableSwitcher";
 import { Tooltip } from "react-tooltip";
+import InboxTableArea from "./InboxTableArea";
+import PipelineTableArea from "./PipelineTableArea";
 
 
 export default function DealsTable() {
@@ -91,7 +91,7 @@ export default function DealsTable() {
 
             {
                 activeTab === 'inbox' ?
-                    <InboxTableArea />
+                    <InboxTableArea />:activeTab === 'pipeline'?<PipelineTableArea/>
                     : <ArchiveTableArea />
             }
 
