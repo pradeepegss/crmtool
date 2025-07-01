@@ -78,7 +78,6 @@ const leads = [
 ];
 
 
-
 export default function PipelineTableArea() {
 
   return (
